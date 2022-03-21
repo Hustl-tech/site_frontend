@@ -1,0 +1,70 @@
+.user-section {
+    width: 50%;
+}
+
+.user {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.edit-button {
+    position: relative;
+}
+
+.profile {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-pic {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.edit {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    display: none;
+}
+
+.edit a {
+    color: #000;
+}
+
+.edit-button {
+    position: relative;
+}
+
+.font-size-16 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.width-full {
+    width: 100%;
+}
+
+.card-content {
+    position: relative;
+    width: 100%;
+    border-top: 1px solid rgb(187, 187, 187);
+    border-bottom: 1px solid rgb(187, 187, 187);
+    padding-bottom: 20px;
+    margin-top: 10px;
+    padding-top: 16px;
+}

@@ -1,0 +1,62 @@
+<div class="signup" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card fxFlex="40" fxFlex.xs="80" fxFlex.md="60" fxFlex.sm="60" class="card" fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title class="form-title">Sign Up</mat-card-title>
+        <form fxLayout="column" #userForm="ngForm" id="userForm" class="form" fxFlex="100">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" name="username" placeholder="Username" [(ngModel)]="user.username" #username="ngModel" pattern="[^\s]+" minlength="1" required>
+                <mat-error *ngIf="username.invalid || username.dirty">
+                    <span *ngIf="username.hasError('required')">Username is
+                        <strong>required</strong>
+                    </span>
+                    <span *ngIf="username.hasError('pattern')">No Spaces allowed..</span>
+                    <span *ngIf="username.hasError('minlength')">Username must be atleast one character long..</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="user.email" #email="ngModel" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" required email>
+                <mat-error *ngIf="email.invalid || email.dirty">
+                    <span *ngIf="email.hasError('required')">Email is
+                        <strong>required</strong>
+                    </span>
+                    <span *ngIf="email.hasError('pattern') || email.hasError('email')">Email must be a
+                        <strong>valid</strong> email address
+                    </span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" name="password" [(ngModel)]="user.password" minlength="6" required #password="ngModel">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="password.invalid || password.dirty">
+                    <span *ngIf="password.hasError('required')">Password is
+                        <strong>required</strong>
+                    </span>
+                    <span *ngIf="password.hasError('minlength')">Password must be atleast 6 characters long..</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Confirm Password" name="confirmPassword" [(ngModel)]="user.confirmPassword" minlength="6" required validateEqual="password" #confirmPassword="ngModel">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="confirmPassword.invalid || confirmPassword.dirty">
+                    <span *ngIf="confirmPassword.hasError('required')">This field is
+                        <strong>required</strong>
+                    </span>
+                    <span *ngIf="confirmPassword.hasError('minlength')">Password must be atleast 6 characters long..</span>
+                    <span *ngIf="confirmPassword.hasError('validateEqual')">Passwords not
+                        <strong>match</strong>
+                    </span>
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <button mat-raised-button color="primary" [disabled]="!userForm.form.dirty || userForm.form.invalid" (click)="signUp(userForm)">Sign Up</button>
+        <mat-card-content class="sub-text">Already have an account?</mat-card-content>
+        <button mat-button color="primary" routerLink="/login">Login</button>
+    </mat-card>
+</div>

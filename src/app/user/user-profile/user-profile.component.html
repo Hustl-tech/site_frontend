@@ -1,0 +1,54 @@
+<div fxLayout="row" fxLayoutAlign="center start" fxLayout.xs="column" fxLayoutAlign.xs="start center">
+
+    <div class="user-section" fxLayoutAlign="space-between start">
+        <mat-card fxFlex="30" class="user">
+            <!-- <span class="right-toolitem">
+        <button class="edit-button" color="primary" mat-icon-button mat-fab matTooltip="Edit"
+          [matTooltipPosition]="'before'">
+          <mat-icon class="one">mode_edit</mat-icon>
+        </button>
+      </span> -->
+
+            <mat-card-content class="mat-card-header" fxLayout="column" fxLayoutAlign="start center">
+                <div class="profile-pic">
+                    <img class="profile" *ngIf="!user?.avatar" src="/assets/images/profile.png">
+                    <img class="profile" *ngIf="user?.avatar" src="{{user.avatar}}">
+
+                    <div class="edit">
+                        <button mat-icon-button>
+                            <mat-icon matTooltip="Change profile" [matTooltipPosition]="'after'">photo_camera
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card-content>
+
+            <mat-card-content class="card-content">
+                <div>
+                    <table class="width-fit-content" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="6px">
+                        <tr class="width-full" fxLayout="row" fxLayoutALign="start stretch" fxLayoutGap="40px">
+                            <mat-icon class="icon">person</mat-icon>
+
+                            <td *ngIf="user?.username" class="profile-list-one">
+                                {{user.username}}
+                            </td>
+
+
+                        </tr>
+                        <tr class="width-full" fxLayout="row" fxLayoutALign="start stretch" fxLayoutGap="40px">
+                            <mat-icon class="icon">email</mat-icon>
+
+                            <td *ngIf="user?.email" class="profile-list-one">
+                                {{user.email}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </mat-card-content>
+
+
+        </mat-card>
+
+        <app-user-posts fxFlex="60"></app-user-posts>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div fxLayout="row" fxLayoutAlign="space-between start">
+    <h2 mat-dialog-title>Post a content</h2>
+    <button mat-icon-button mat-dialog-close aria-label="close">
+        <mat-icon>highlight_off</mat-icon>
+    </button>
+</div>
+
+<form #blogForm="ngForm" id="blogForm" class="form">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" name="title" placeholder="title" [(ngModel)]="blog.title" #title="ngModel" minlength="1" required>
+            <mat-error *ngIf="title.invalid || title.dirty">
+                <span *ngIf="title.hasError('required')">Title is
+                        <strong>required</strong>
+                    </span>
+                <span *ngIf="title.hasError('minlength')">Title must be atleast a character long..</span>
+            </mat-error>
+        </mat-form-field>
+
+
+        <app-text-editor [(ngModel)]="blog.description" [config]="config" name="description" #description="ngModel" required></app-text-editor>
+
+
+        <mat-form-field class="example-chip-list tags" appearance="outline">
+            <mat-label>Tags</mat-label>
+            <mat-chip-list #chipList aria-label="Tag selection">
+                <mat-chip *ngFor="let tag of blog.tags" (removed)="remove(tag)">
+                    {{tag}}
+                    <button matChipRemove>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input placeholder="Add Tags..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="example-chip-list tags" appearance="outline">
+            <input matInput type="text" class="fileInput">
+            <input (change)="onFileSelect($event)" type="file" />
+        </mat-form-field>
+
+        <div *ngIf="imageData">
+            <img [src]="imageData" [alt]="blog.title" class="coverImg" />
+        </div> -->
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-raised-button color="primary" [disabled]="!blogForm.form.dirty || blogForm.form.invalid" (click)="blogPost(blogForm)">
+            <span *ngIf="!saving">Publish</span>
+            <span *ngIf="saving">Publishing</span>
+        </button>
+    </mat-dialog-actions>
+
+</form>

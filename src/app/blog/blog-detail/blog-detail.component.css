@@ -1,0 +1,21 @@
+:host ::ng-deep .ck-editor__editable_inline {
+    border: none !important;
+}
+
+:host ::ng-deep .ck-toolbar_grouping {
+    display: none;
+}
+
+.detail {
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.example-header-image {
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
+    background-size: cover;
+}

@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="detail">
+    <div fxFlex="25" fxHide.lt-md></div>
+    <mat-card class="example-card" fxFlex="50" fxFlex.lt-md="100" *ngIf="blog">
+        <mat-card-header>
+            <div mat-card-avatar *ngIf="blog?.author?.avatar" class="example-header-image" [ngStyle]="{'background-image': 'url(' + blog.author.avatar + ')'}"></div>
+            <div mat-card-avatar *ngIf="!blog?.author?.avatar" class="example-header-image" [ngStyle]="{'background-image': 'url(assets/images/profile.png)'}"></div>
+            <mat-card-title><a routerLink="">{{ blog?.author?.username }}</a></mat-card-title>
+            <mat-card-subtitle>{{ moment(blog?.createdAt).fromNow() }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content *ngIf="blog?.description">
+            <!-- {{ blog.description }} -->
+            <app-text-editor [(ngModel)]="blog.description" [config]="{}" [readonly]="true"></app-text-editor>
+        </mat-card-content>
+        <img mat-card-image class="coverImg" *ngIf="blog?.coverImage" src="{{ blog.coverImage }}" alt="{{ blog.title }}">
+        <mat-chip-list class="example-chip" cdkDropList cdkDropListOrientation="horizontal">
+            <mat-chip class="example-box" cdkDrag *ngFor="let tag of blog?.tags">
+                #{{tag}}
+            </mat-chip>
+        </mat-chip-list>
+
+    </mat-card>
+
+    <div fxFlex="25" fxHide.lt-md></div>
+</div>

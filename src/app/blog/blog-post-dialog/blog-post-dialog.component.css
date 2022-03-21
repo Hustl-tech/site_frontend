@@ -1,0 +1,21 @@
+.tags {
+    margin-top: 15px;
+}
+
+.mat-form-field {
+    width: 100%;
+    height: 100%;
+}
+
+.fileInput {
+    display: none;
+}
+
+.coverImg {
+    height: 100%;
+    object-fit: cover;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 300px !important;
+}
