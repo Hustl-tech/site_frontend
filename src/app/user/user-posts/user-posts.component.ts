@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 
+import { BlogPostDialogComponent } from './../../blog/blog-post-dialog/blog-post-dialog.component';
+import { NotifyService } from './../../services/notify.service';
 import { BlogService } from 'src/app/blog/services/blog.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Blog } from 'src/app/models/blog.model';
 
 class Query {
@@ -35,7 +38,9 @@ export class UserPostsComponent implements OnInit {
   public loading: boolean = false;
 
   constructor(
-    private blogService: BlogService
+    private blogService: BlogService,
+    public dialog: MatDialog,
+    public notifyService: NotifyService
   ) { }
 
   ngOnInit(): void {
@@ -63,4 +68,32 @@ export class UserPostsComponent implements OnInit {
     this.query.skip = this.query.skip + this.query.limit;
     this.getData(this.query);
   }
+
+  editBlog(blogs:any){
+    let ta = JSON.parse(JSON.stringify(blogs));
+    let dialogRef = this.dialog.open(BlogPostDialogComponent,{
+      width:'50%',
+    });
+    dialogRef.componentInstance.blog = ta;
+    dialogRef.afterClosed().subscribe(result => {
+      this.getData({});
+    });
+  }
+
+  removeBlog(blog:any,i){
+    this.blogService.remove(blog).subscribe({
+      next: (data) => {
+        if (data) {
+          this.blogs.splice(i, 1);
+          this.notifyService.show('Successfully deleted...');
+        }
+      },
+      error: (e) => {
+      },
+    });
+  }
 }
+
+// cloudnary upload images
+// google drive
+// a2 hosting

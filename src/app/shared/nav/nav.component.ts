@@ -13,6 +13,8 @@ import { BlogPostDialogComponent } from 'src/app/blog/blog-post-dialog/blog-post
 export class NavComponent implements OnInit {
 
   isAuthenticated: boolean = false;
+  key:string;
+
   constructor(
     public authService:AuthService,
     public dialog: MatDialog,
@@ -22,7 +24,7 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.authService.userLoggedIn$
     .subscribe(m => {
-      this.isAuthenticated = m
+      this.isAuthenticated = m;
     }) ;
   }
 
@@ -32,11 +34,14 @@ export class NavComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      // this.animal = result;
       this.router.navigate(['/user/profile'])
-
     });
   }
+
+
+	search(key){
+		this.router.navigate(['/'],{ queryParams: key})
+	}
+
 
 }

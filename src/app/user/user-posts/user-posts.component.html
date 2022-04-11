@@ -1,4 +1,4 @@
-<div *ngFor="let blog of blogs">
+<div *ngFor="let blog of blogs; let i = index;">
     <mat-card class="example-card">
         <mat-card-header>
             <div mat-card-avatar *ngIf="blog.author.avatar" class="example-header-image" [ngStyle]="{'background-image': 'url(' + blog.author.avatar + ')'}"></div>
@@ -15,12 +15,22 @@
                 #{{tag}}
             </mat-chip>
         </mat-chip-list>
-        <!-- <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-        </mat-card-actions> -->
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menu">
+                <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editBlog(blog)">
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit</span>
+                </button>
+            <button mat-menu-item (click)="removeBlog(blog,i)">
+                    <mat-icon>delete_forever</mat-icon>
+                    <span>Remove</span>
+            </button>
+        </mat-menu>
     </mat-card>
 </div>
-<div class="load-more-button" fxLayout="column" fxLayoutAlign="center center" *ngIf="blogs?.length != blogCount">
+<div class="load-more-button" fxLayout="column" fxLayoutAlign="center center" *ngIf="blogs && blogs?.length != blogCount">
     <button mat-button color="primary" (click)="loadMore()">Load More</button>
 </div>

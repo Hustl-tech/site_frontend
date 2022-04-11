@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BlogService } from './../services/blog.service';
 import { Blog } from 'src/app/models/blog.model';
@@ -35,10 +36,31 @@ export class BlogListComponent implements OnInit {
   public loading: boolean = false;
 
   constructor(
-    private blogService: BlogService
-  ) { }
+    private blogService: BlogService,
+    private route: ActivatedRoute,
+    private routerR: Router
+  ) { 
+      // this is for routerLink on same component when only queryParameter changes
+      this.routerR.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+      };
+
+    route.queryParams.subscribe(
+			(params) => {
+				if (params.key) {
+					this.query.key = params['key'];
+          this.getData(this.query);
+				}
+			})
+      this.getData(this.query);
+
+  }
 
   ngOnInit(): void {
+    this.getData(this.query);
+  }
+
+  ngOnChanges(): void {
     this.getData(this.query);
   }
 

@@ -33,6 +33,28 @@ export class BlogService {
       ) ; 
   }
 
+  post(blog:Blog): Observable<any>{
+    return this.http.post<Blog>(`${this.url}`, blog)
+    .pipe(
+      catchError(this.baseService.handleError('Create a new post'))
+    ) ; 
+  }
+
+  update(blog:Blog): Observable<any>{
+    return this.http.put<Blog>(`${this.url}/${blog._id}`,blog)
+    .pipe(
+      catchError(this.baseService.handleError('Update post'))
+    )
+  }
+
+  remove(blog:Blog): Observable<any>{
+    return this.http.delete<Blog>(`${this.url}/${blog._id}`)
+    .pipe(
+      catchError(this.baseService.handleError('Delete post'))
+    )
+  }
+
+
   public list(query: any) {
 
     return this.http.get<any>(this.url + this.baseService.getQueryString(query))
@@ -41,6 +63,7 @@ export class BlogService {
       );
   }
 
+ 
   public listUserPosts(query: any) {
 
     return this.http.get<any>(this.url + '/posts'  + this.baseService.getQueryString(query))

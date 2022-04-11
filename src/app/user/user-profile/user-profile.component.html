@@ -1,13 +1,7 @@
-<div fxLayout="row" fxLayoutAlign="center start" fxLayout.xs="column" fxLayoutAlign.xs="start center">
+<div fxLayout="row" fxLayoutAlign="center start" fxLayoutAlign.xs="center center">
 
-    <div class="user-section" fxLayoutAlign="space-between start">
-        <mat-card fxFlex="30" class="user">
-            <!-- <span class="right-toolitem">
-        <button class="edit-button" color="primary" mat-icon-button mat-fab matTooltip="Edit"
-          [matTooltipPosition]="'before'">
-          <mat-icon class="one">mode_edit</mat-icon>
-        </button>
-      </span> -->
+    <div fxLayout.xs="column" fxLayout.lt-md="column" fxFlex="70" fxLayoutAlign.xs="center center" fxFlex.xs="100" fxLayoutAlign="space-around start">
+        <mat-card fxFlex="30" fxFlex.xs="100" class="user">
 
             <mat-card-content class="mat-card-header" fxLayout="column" fxLayoutAlign="start center">
                 <div class="profile-pic">
@@ -33,7 +27,6 @@
                                 {{user.username}}
                             </td>
 
-
                         </tr>
                         <tr class="width-full" fxLayout="row" fxLayoutALign="start stretch" fxLayoutGap="40px">
                             <mat-icon class="icon">email</mat-icon>
@@ -49,6 +42,6 @@
 
         </mat-card>
 
-        <app-user-posts fxFlex="60"></app-user-posts>
+        <app-user-posts fxFlex="60" fxFlex.xs="100" class="posts"></app-user-posts>
     </div>
 </div>

@@ -19,6 +19,8 @@ export class BlogPostDialogComponent implements OnInit {
   blog: Blog = new Blog({});
   public saving: boolean = false;
 
+  button:string;
+
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
@@ -108,11 +110,40 @@ export class BlogPostDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<BlogPostDialogComponent>
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.blog._id)
+      this.button = 'Update';
+    else  
+      this.button = "Publish";
+  }
 
-  blogPost(blogForm) {
-    if (blogForm.form.valid) {
-      this.blogService.create(this.blog, this.coverImg).subscribe({
+  save(blogForm){
+    if(blogForm.form.valid){
+      if(this.blog._id)
+        this.updatePost();
+      else
+        this.blogPost() ; 
+    }
+  }
+
+  updatePost(){
+    this.blogService.update(this.blog).subscribe({
+      next: (data) => {
+        if (data) {
+          this.saving = true;
+          this.notifyService.show('Successfully updated...');
+          this.dialogRef.close(data);
+        }
+      },
+      error: (e) => {
+        this.saving = false;
+      },
+    });
+  }
+
+
+  blogPost() {
+      this.blogService.post(this.blog).subscribe({
         next: (data) => {
           if (data) {
             this.saving = true;
@@ -124,7 +155,6 @@ export class BlogPostDialogComponent implements OnInit {
           this.saving = false;
         },
       });
-    }
   }
 
   onFileSelect(event: Event) {

@@ -47,9 +47,9 @@
 
     <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-raised-button color="primary" [disabled]="!blogForm.form.dirty || blogForm.form.invalid" (click)="blogPost(blogForm)">
-            <span *ngIf="!saving">Publish</span>
-            <span *ngIf="saving">Publishing</span>
+        <button mat-raised-button color="primary" [disabled]="!blogForm.form.dirty || blogForm.form.invalid" (click)="save(blogForm)">
+            <span *ngIf="!saving">{{button}}</span>
+            <span *ngIf="saving">{{button}}ing</span>
         </button>
     </mat-dialog-actions>
 
